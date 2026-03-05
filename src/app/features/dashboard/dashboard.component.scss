@@ -1,0 +1,33 @@
+.dashboard-container {
+  .dashboard-header {
+    margin-bottom: 1.5rem;
+    h2 { margin: 0; color: #1565C0; }
+    p { margin: 0.25rem 0 0; color: #666; }
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+
+    .stat-content {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      .stat-icon {
+        font-size: 2rem;
+        color: #1565C0;
+        &.warning { color: #f59e0b; }
+        &.success { color: #22c55e; }
+        &.danger { color: #ef4444; }
+      }
+
+      .stat-value { font-size: 2rem; font-weight: 700; color: #1a1a1a; }
+      .stat-label { font-size: 0.875rem; color: #666; }
+    }
+  }
+
+  .dashboard-actions { margin-bottom: 1.5rem; }
+}

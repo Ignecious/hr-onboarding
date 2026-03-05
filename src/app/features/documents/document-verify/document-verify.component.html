@@ -1,0 +1,45 @@
+<div class="document-verify-container">
+  <p-toast></p-toast>
+  <p-confirmDialog></p-confirmDialog>
+
+  <div class="page-header">
+    <h2>Document Verification</h2>
+  </div>
+
+  <div *ngIf="document">
+    <div class="verify-grid">
+      <p-card header="Document Preview" styleClass="preview-card">
+        <div class="document-preview">
+          <i class="pi pi-file-pdf preview-icon"></i>
+          <p class="preview-filename">{{ document.fileName }}</p>
+          <p class="preview-note">Document preview not available in prototype</p>
+        </div>
+      </p-card>
+
+      <p-card header="Document Details">
+        <div class="detail-item"><label>Document Type</label><span>{{ getDocTypeLabel(document.documentType) }}</span></div>
+        <div class="detail-item"><label>File Name</label><span>{{ document.fileName }}</span></div>
+        <div class="detail-item"><label>Upload Date</label><span>{{ document.uploadedAt }}</span></div>
+        <div class="detail-item"><label>Current Status</label><p-tag [value]="document.status"></p-tag></div>
+        <div class="detail-item"><label>Employee ID</label><span>{{ document.employeeId }}</span></div>
+
+        <p-divider></p-divider>
+
+        <div class="rejection-section">
+          <label>Rejection Notes (required for rejection)</label>
+          <textarea pInputTextarea [(ngModel)]="rejectionNotes" rows="4" placeholder="Enter reason for rejection..." class="w-full mt-1"></textarea>
+        </div>
+
+        <div class="action-buttons">
+          <p-button label="Approve" icon="pi pi-check" styleClass="p-button-success" (onClick)="approve()"></p-button>
+          <p-button label="Reject" icon="pi pi-times" styleClass="p-button-danger ml-2" (onClick)="reject()"></p-button>
+          <p-button label="Back" icon="pi pi-arrow-left" styleClass="p-button-text ml-2" [routerLink]="['/employees', document.employeeId, 'documents']"></p-button>
+        </div>
+      </p-card>
+    </div>
+  </div>
+
+  <div *ngIf="!document">
+    <p-card><p>Document not found.</p></p-card>
+  </div>
+</div>

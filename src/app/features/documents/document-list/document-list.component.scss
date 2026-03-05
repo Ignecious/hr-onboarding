@@ -1,0 +1,9 @@
+.document-list-container {
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    h2 { margin: 0; color: #1565C0; }
+  }
+}

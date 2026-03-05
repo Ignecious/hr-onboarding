@@ -1,0 +1,11 @@
+.employee-list-container {
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    h2 { margin: 0; color: #1565C0; }
+  }
+  .filter-bar { display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem; }
+  .progress-cell { display: flex; align-items: center; gap: 0.5rem; .progress-text { font-size: 0.8rem; white-space: nowrap; } }
+}
