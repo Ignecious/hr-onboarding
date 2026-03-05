@@ -3,10 +3,14 @@
 Angular 17 frontend prototype for employee onboarding management.
 
 ## Installation
+```bash
 npm install
+```
 
 ## Development Server
+```bash
 npm start
+```
 
 Navigate to http://localhost:4200
 

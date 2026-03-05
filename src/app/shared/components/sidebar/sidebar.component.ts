@@ -17,8 +17,8 @@ export class SidebarComponent {
         { label: 'Create New', icon: 'pi pi-plus', routerLink: ['/employees/create'] }
       ]
     },
-    { label: 'Documents', icon: 'pi pi-file', routerLink: ['/employees'] },
-    { label: 'Onboarding Checklists', icon: 'pi pi-check-square', routerLink: ['/employees'] },
+    { label: 'Documents', icon: 'pi pi-file', routerLink: ['/employees'], title: 'Select an employee to manage their documents' },
+    { label: 'Onboarding Checklists', icon: 'pi pi-check-square', routerLink: ['/employees'], title: 'Select an employee to view their onboarding checklist' },
     { label: 'Reports', icon: 'pi pi-chart-bar', disabled: true }
   ];
 }
