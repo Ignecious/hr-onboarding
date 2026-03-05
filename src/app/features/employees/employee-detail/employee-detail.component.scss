@@ -1,0 +1,29 @@
+.employee-detail-container {
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    h2 { margin: 0; color: #1565C0; }
+    p { margin: 0.25rem 0 0; color: #666; }
+  }
+  .progress-section {
+    margin-bottom: 1.5rem;
+    .progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; font-weight: 600; }
+    .progress-label { font-size: 0.85rem; color: #666; margin-top: 0.5rem; display: block; }
+  }
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    .info-item {
+      label { display: block; font-weight: 600; font-size: 0.85rem; color: #666; margin-bottom: 0.25rem; }
+      span { font-size: 1rem; color: #333; }
+    }
+  }
+  .tab-actions { margin-bottom: 1rem; }
+  .step-icon-success { color: #22c55e; }
+  .step-icon-warning { color: #f59e0b; }
+  .step-icon-danger { color: #ef4444; }
+  .step-icon-secondary { color: #94a3b8; }
+}

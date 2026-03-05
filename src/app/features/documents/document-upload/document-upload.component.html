@@ -1,0 +1,39 @@
+<div class="document-upload-container">
+  <p-toast></p-toast>
+  <div class="page-header">
+    <h2>Upload Document</h2>
+    <p-button label="Back" icon="pi pi-arrow-left" styleClass="p-button-text" (onClick)="goBack()"></p-button>
+  </div>
+
+  <p-card header="Document Upload">
+    <div class="form-field mb-4">
+      <label>Document Type *</label>
+      <p-dropdown [options]="documentTypes" [(ngModel)]="selectedDocType" optionLabel="label" optionValue="value" placeholder="Select Document Type" styleClass="w-full mt-1"></p-dropdown>
+    </div>
+
+    <p-fileUpload
+      name="document"
+      [multiple]="false"
+      accept=".pdf,.jpg,.jpeg,.png"
+      [maxFileSize]="10000000"
+      (onSelect)="onFileSelect($event)"
+      [customUpload]="true"
+      (uploadHandler)="onUpload($event)"
+      chooseLabel="Choose File"
+      uploadLabel="Upload"
+      cancelLabel="Clear">
+      <ng-template pTemplate="content">
+        <div class="upload-placeholder" *ngIf="!uploadedFiles.length">
+          <i class="pi pi-cloud-upload"></i>
+          <p>Drag and drop files here or click to choose</p>
+          <p class="upload-hint">Supported formats: PDF, JPG, PNG (max 10MB)</p>
+        </div>
+        <ul *ngIf="uploadedFiles.length" class="file-list">
+          <li *ngFor="let file of uploadedFiles">
+            <i class="pi pi-file"></i> {{ file.name }} ({{ (file.size / 1024 / 1024).toFixed(2) }}MB)
+          </li>
+        </ul>
+      </ng-template>
+    </p-fileUpload>
+  </p-card>
+</div>

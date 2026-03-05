@@ -1,0 +1,39 @@
+<div class="document-list-container">
+  <div class="page-header">
+    <h2>Documents</h2>
+    <p-button label="Upload New Document" icon="pi pi-upload" (onClick)="uploadDocument()"></p-button>
+  </div>
+
+  <p-card>
+    <p-table [value]="documents" [tableStyle]="{'min-width': '60rem'}" [rowHover]="true">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Document Type</th>
+          <th>File Name</th>
+          <th>File Size</th>
+          <th>Upload Date</th>
+          <th>Status</th>
+          <th>Verified By</th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-doc>
+        <tr>
+          <td>{{ doc.documentType }}</td>
+          <td><i class="pi pi-file mr-1"></i>{{ doc.fileName }}</td>
+          <td>{{ formatFileSize(doc.fileSize) }}</td>
+          <td>{{ doc.uploadedAt }}</td>
+          <td><p-tag [value]="doc.status" [severity]="getStatusSeverity(doc.status)"></p-tag></td>
+          <td>{{ doc.verifiedBy || '-' }}</td>
+          <td>
+            <p-button icon="pi pi-eye" styleClass="p-button-text p-button-sm" pTooltip="View"></p-button>
+            <p-button icon="pi pi-check-circle" styleClass="p-button-text p-button-sm p-button-success" pTooltip="Verify" *ngIf="doc.status === 'PENDING_VERIFICATION'" (onClick)="verifyDocument(doc)"></p-button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr><td colspan="7" class="text-center">No documents found for this employee.</td></tr>
+      </ng-template>
+    </p-table>
+  </p-card>
+</div>

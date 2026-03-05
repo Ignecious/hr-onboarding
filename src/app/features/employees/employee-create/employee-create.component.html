@@ -1,0 +1,67 @@
+<div class="employee-create-container">
+  <p-toast></p-toast>
+  <div class="page-header">
+    <h2>Create New Employee</h2>
+    <p-button label="Back to Employees" icon="pi pi-arrow-left" styleClass="p-button-text" routerLink="/employees"></p-button>
+  </div>
+
+  <p-card header="Employee Information">
+    <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+      <div class="form-grid">
+        <div class="form-field">
+          <label for="firstName">First Name *</label>
+          <input id="firstName" type="text" pInputText formControlName="firstName" placeholder="Enter first name" class="w-full" [class.ng-invalid]="isFieldInvalid('firstName')" />
+          <small class="p-error" *ngIf="isFieldInvalid('firstName')">First name is required (min 2 characters)</small>
+        </div>
+        <div class="form-field">
+          <label for="lastName">Last Name *</label>
+          <input id="lastName" type="text" pInputText formControlName="lastName" placeholder="Enter last name" class="w-full" [class.ng-invalid]="isFieldInvalid('lastName')" />
+          <small class="p-error" *ngIf="isFieldInvalid('lastName')">Last name is required (min 2 characters)</small>
+        </div>
+        <div class="form-field">
+          <label for="idNumber">SA ID Number *</label>
+          <input id="idNumber" type="text" pInputText formControlName="idNumber" placeholder="13-digit SA ID number" class="w-full" maxlength="13" [class.ng-invalid]="isFieldInvalid('idNumber')" />
+          <small class="p-error" *ngIf="isFieldInvalid('idNumber')">Valid 13-digit SA ID number required</small>
+        </div>
+        <div class="form-field">
+          <label for="email">Email Address *</label>
+          <input id="email" type="email" pInputText formControlName="email" placeholder="employee@gauteng.gov.za" class="w-full" [class.ng-invalid]="isFieldInvalid('email')" />
+          <small class="p-error" *ngIf="isFieldInvalid('email')">Valid email address required</small>
+        </div>
+        <div class="form-field">
+          <label for="phoneNumber">Phone Number *</label>
+          <input id="phoneNumber" type="text" pInputText formControlName="phoneNumber" placeholder="0821234567" class="w-full" maxlength="10" [class.ng-invalid]="isFieldInvalid('phoneNumber')" />
+          <small class="p-error" *ngIf="isFieldInvalid('phoneNumber')">Valid SA phone number required (e.g. 0821234567)</small>
+        </div>
+        <div class="form-field">
+          <label for="department">Department *</label>
+          <p-dropdown id="department" [options]="departments" formControlName="department" optionLabel="label" optionValue="value" placeholder="Select Department" styleClass="w-full" [class.ng-invalid]="isFieldInvalid('department')"></p-dropdown>
+          <small class="p-error" *ngIf="isFieldInvalid('department')">Department is required</small>
+        </div>
+        <div class="form-field">
+          <label for="role">Role *</label>
+          <input id="role" type="text" pInputText formControlName="role" placeholder="e.g. Nurse, Accountant" class="w-full" [class.ng-invalid]="isFieldInvalid('role')" />
+          <small class="p-error" *ngIf="isFieldInvalid('role')">Role is required</small>
+        </div>
+        <div class="form-field">
+          <label for="startDate">Start Date *</label>
+          <p-calendar id="startDate" formControlName="startDate" dateFormat="yy-mm-dd" [showIcon]="true" styleClass="w-full" [class.ng-invalid]="isFieldInvalid('startDate')"></p-calendar>
+          <small class="p-error" *ngIf="isFieldInvalid('startDate')">Start date is required</small>
+        </div>
+      </div>
+
+      <p-divider></p-divider>
+
+      <div class="id-upload-section">
+        <h4>Upload SA ID Document</h4>
+        <p-fileUpload mode="basic" chooseLabel="Choose SA ID File" accept=".pdf,.jpg,.png" [maxFileSize]="5000000" styleClass="mb-2"></p-fileUpload>
+        <p class="upload-note"><i class="pi pi-info-circle"></i> Upload a clear, legible copy of the employee's SA ID document</p>
+      </div>
+
+      <div class="form-actions">
+        <p-button type="button" label="Cancel" icon="pi pi-times" styleClass="p-button-outlined" (onClick)="onCancel()"></p-button>
+        <p-button type="submit" label="Create Employee" icon="pi pi-check" [loading]="isSubmitting" styleClass="ml-2"></p-button>
+      </div>
+    </form>
+  </p-card>
+</div>

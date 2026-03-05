@@ -1,0 +1,14 @@
+.document-verify-container {
+  .page-header { margin-bottom: 1.5rem; h2 { margin: 0; color: #1565C0; } }
+  .verify-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 1.5rem; }
+  .document-preview {
+    text-align: center;
+    padding: 2rem;
+    .preview-icon { font-size: 4rem; color: #e74c3c; display: block; margin-bottom: 1rem; }
+    .preview-filename { font-weight: 600; word-break: break-all; }
+    .preview-note { color: #999; font-size: 0.85rem; }
+  }
+  .detail-item { display: flex; flex-direction: column; margin-bottom: 1rem; label { font-weight: 600; font-size: 0.85rem; color: #666; margin-bottom: 0.25rem; } }
+  .rejection-section { label { font-weight: 600; display: block; margin-bottom: 0.5rem; } }
+  .action-buttons { display: flex; margin-top: 1.5rem; }
+}

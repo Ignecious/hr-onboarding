@@ -1,0 +1,43 @@
+<div class="checklist-container">
+  <p-toast></p-toast>
+  <div class="page-header">
+    <h2>Onboarding Checklist</h2>
+    <p-button label="Back to Employee" icon="pi pi-arrow-left" styleClass="p-button-text" [routerLink]="['/employees', employeeId]"></p-button>
+  </div>
+
+  <div *ngIf="checklist">
+    <p-card styleClass="mb-3">
+      <div class="progress-header">
+        <span class="progress-label">Overall Progress: {{ checklist.completionPercentage }}%</span>
+        <p-tag [value]="checklist.overallStatus"></p-tag>
+      </div>
+      <p-progressBar [value]="checklist.completionPercentage" [style]="{'height': '14px'}"></p-progressBar>
+    </p-card>
+
+    <p-accordion [multiple]="true">
+      <p-accordionTab *ngFor="let step of checklist.steps">
+        <ng-template pTemplate="header">
+          <div class="step-header">
+            <i [class]="getStepIcon(step.status)" [ngClass]="getStepIconClass(step.status)"></i>
+            <span class="step-name">{{ step.name }}</span>
+            <p-tag [value]="step.status" [severity]="getStatusSeverity(step.status)" styleClass="ml-2"></p-tag>
+            <span class="step-required" *ngIf="step.required">Required</span>
+          </div>
+        </ng-template>
+        <div class="step-detail">
+          <p>{{ step.description }}</p>
+          <p><strong>Category:</strong> {{ step.category }}</p>
+          <p *ngIf="step.completedAt"><strong>Completed:</strong> {{ step.completedAt }}</p>
+          <div class="step-actions">
+            <p-button label="Mark In Progress" icon="pi pi-spinner" styleClass="p-button-warning p-button-sm mr-1"
+              *ngIf="step.status === 'PENDING'" (onClick)="updateStep(step, 'IN_PROGRESS')"></p-button>
+            <p-button label="Mark Complete" icon="pi pi-check" styleClass="p-button-success p-button-sm mr-1"
+              *ngIf="step.status !== 'COMPLETED'" (onClick)="updateStep(step, 'COMPLETED')"></p-button>
+            <p-button label="Mark Rejected" icon="pi pi-times" styleClass="p-button-danger p-button-sm"
+              *ngIf="step.status !== 'REJECTED'" (onClick)="updateStep(step, 'REJECTED')"></p-button>
+          </div>
+        </div>
+      </p-accordionTab>
+    </p-accordion>
+  </div>
+</div>
