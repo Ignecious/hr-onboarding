@@ -1,0 +1,72 @@
+<div class="employee-portal">
+  <div *ngIf="loading" class="loading-container">
+    <p-progressBar mode="indeterminate" [style]="{'height': '4px'}"></p-progressBar>
+  </div>
+
+  <ng-container *ngIf="portalData && !loading">
+    <!-- Welcome Header -->
+    <div class="portal-header">
+      <div class="welcome-info">
+        <h2>Welcome, {{ portalData.firstName }} {{ portalData.lastName }}</h2>
+        <p>{{ portalData.role }} · {{ portalData.department }} Department · {{ portalData.employeeId }}</p>
+      </div>
+    </div>
+
+    <div class="portal-grid">
+      <!-- Progress Card -->
+      <p-card header="My Onboarding Progress" styleClass="progress-card">
+        <div class="progress-section">
+          <div class="progress-percentage">{{ portalData.completionPercentage }}%</div>
+          <p-progressBar [value]="portalData.completionPercentage"
+            [style]="{'height': '20px', 'border-radius': '10px'}">
+          </p-progressBar>
+          <p class="progress-hint">Keep going! Complete all steps to finish your onboarding.</p>
+        </div>
+      </p-card>
+
+      <!-- Quick Actions -->
+      <p-card header="Quick Actions" styleClass="actions-card">
+        <div class="actions-grid">
+          <p-button label="Upload Documents" icon="pi pi-upload" styleClass="p-button-outlined action-btn"
+            (onClick)="onUploadDocuments()"></p-button>
+          <p-button label="View Checklist" icon="pi pi-list-check" styleClass="p-button-outlined action-btn"
+            (onClick)="onViewChecklist()"></p-button>
+          <p-button label="Ask for Help" icon="pi pi-question-circle" styleClass="p-button-outlined p-button-secondary action-btn"
+            (onClick)="onAskForHelp()"></p-button>
+        </div>
+      </p-card>
+
+      <!-- Next Steps -->
+      <p-card header="Next Steps" styleClass="next-steps-card">
+        <div *ngIf="portalData.nextSteps.length === 0" class="empty-state">
+          <i class="pi pi-check-circle text-success"></i>
+          <p>All steps completed!</p>
+        </div>
+        <ul class="steps-list" *ngIf="portalData.nextSteps.length > 0">
+          <li *ngFor="let step of portalData.nextSteps" class="step-item">
+            <i class="pi pi-circle step-icon"></i>
+            <div class="step-details">
+              <span class="step-name">{{ step.name }}</span>
+              <span class="step-due">Due: {{ formatDate(step.dueDate) }}</span>
+            </div>
+          </li>
+        </ul>
+      </p-card>
+
+      <!-- Recent Activity -->
+      <p-card header="Recent Activity" styleClass="activity-card">
+        <p-timeline [value]="portalData.recentActivity">
+          <ng-template pTemplate="marker" let-activity>
+            <i [class]="activity.icon + ' activity-icon'"></i>
+          </ng-template>
+          <ng-template pTemplate="content" let-activity>
+            <div class="activity-item">
+              <span class="activity-desc">{{ activity.description }}</span>
+              <span class="activity-time">{{ formatTimestamp(activity.timestamp) }}</span>
+            </div>
+          </ng-template>
+        </p-timeline>
+      </p-card>
+    </div>
+  </ng-container>
+</div>

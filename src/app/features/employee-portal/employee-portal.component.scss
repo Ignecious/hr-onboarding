@@ -1,0 +1,67 @@
+.employee-portal {
+  padding: 1.5rem;
+
+  .loading-container { margin-bottom: 1rem; }
+
+  .portal-header {
+    margin-bottom: 1.5rem;
+    h2 { margin: 0 0 0.25rem; font-size: 1.5rem; color: #1e293b; }
+    p { margin: 0; color: #64748b; }
+  }
+
+  .portal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .progress-section {
+    .progress-percentage { font-size: 2.5rem; font-weight: 700; color: #3b82f6; margin-bottom: 0.75rem; }
+    .progress-hint { margin-top: 0.75rem; color: #64748b; font-size: 0.9rem; }
+  }
+
+  .actions-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    .action-btn { width: 100%; justify-content: flex-start; }
+  }
+
+  .steps-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid #f1f5f9;
+      &:last-child { border-bottom: none; }
+    }
+    .step-icon { color: #3b82f6; margin-top: 2px; }
+    .step-details { display: flex; flex-direction: column; }
+    .step-name { font-weight: 500; color: #1e293b; }
+    .step-due { font-size: 0.8rem; color: #64748b; margin-top: 2px; }
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 2rem;
+    color: #22c55e;
+    i { font-size: 2.5rem; display: block; margin-bottom: 0.5rem; }
+  }
+
+  .activity-item {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 0.5rem;
+    .activity-desc { font-size: 0.9rem; color: #1e293b; }
+    .activity-time { font-size: 0.78rem; color: #94a3b8; margin-top: 2px; }
+  }
+  .activity-icon { font-size: 1.1rem; color: #3b82f6; }
+}
+
+@media (max-width: 768px) {
+  .employee-portal .portal-grid { grid-template-columns: 1fr; }
+}

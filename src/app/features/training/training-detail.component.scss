@@ -1,0 +1,34 @@
+.training-detail {
+  padding: 1.5rem;
+  .loading-container, .detail-header { margin-bottom: 1rem; }
+  .course-detail-card {
+    max-width: 800px;
+    .card-header-content { padding: 1rem 1rem 0; }
+    .header-tags { display: flex; align-items: center; gap: 0.75rem; }
+    .course-category { font-size: 0.78rem; color: #64748b; background: #f1f5f9; padding: 2px 8px; border-radius: 4px; }
+    .course-title { margin: 0.5rem 0; font-size: 1.4rem; font-weight: 700; color: #1e293b; }
+    .course-desc { color: #475569; line-height: 1.6; margin-bottom: 1.25rem; }
+    .course-info-grid {
+      display: flex; gap: 1.5rem; margin-bottom: 1.5rem;
+      .info-item { display: flex; align-items: center; gap: 0.5rem; color: #64748b; font-size: 0.9rem; }
+      i { color: #3b82f6; }
+    }
+    .progress-section {
+      margin-bottom: 1.5rem;
+      .progress-label { display: flex; justify-content: space-between; margin-bottom: 6px; color: #475569; font-size: 0.9rem; }
+    }
+    .course-content-placeholder {
+      text-align: center; padding: 3rem 1rem; background: #f8fafc;
+      border-radius: 8px; border: 2px dashed #e2e8f0;
+      .placeholder-icon { font-size: 3rem; color: #cbd5e1; display: block; margin-bottom: 1rem; }
+      p { margin: 0.25rem 0; color: #94a3b8; }
+      .hint { font-size: 0.8rem; }
+    }
+    .footer-actions { display: flex; gap: 1rem; }
+  }
+  .not-found {
+    text-align: center; padding: 4rem 2rem; color: #94a3b8;
+    i { font-size: 3rem; display: block; margin-bottom: 1rem; }
+    p { margin-bottom: 1.5rem; }
+  }
+}

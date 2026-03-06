@@ -1,0 +1,71 @@
+<div class="training-detail">
+  <div *ngIf="loading" class="loading-container">
+    <p-progressBar mode="indeterminate" [style]="{'height': '4px'}"></p-progressBar>
+  </div>
+
+  <ng-container *ngIf="!loading && course">
+    <div class="detail-header">
+      <p-button icon="pi pi-arrow-left" label="Back to Training" styleClass="p-button-text"
+        (onClick)="goBack()"></p-button>
+    </div>
+
+    <p-card styleClass="course-detail-card">
+      <ng-template pTemplate="header">
+        <div class="card-header-content">
+          <div class="header-tags">
+            <p-tag [value]="getStatusLabel(course.status)"
+              [severity]="getStatusSeverity(course.status)"></p-tag>
+            <span *ngIf="course.category" class="course-category">{{ course.category }}</span>
+          </div>
+        </div>
+      </ng-template>
+
+      <h2 class="course-title">{{ course.title }}</h2>
+      <p class="course-desc">{{ course.description }}</p>
+
+      <div class="course-info-grid">
+        <div class="info-item">
+          <i class="pi pi-clock"></i>
+          <span>{{ course.duration }}</span>
+        </div>
+        <div class="info-item">
+          <i class="pi pi-calendar"></i>
+          <span>Due: {{ formatDate(course.dueDate) }}</span>
+        </div>
+      </div>
+
+      <div class="progress-section" *ngIf="course.status !== 'not_started'">
+        <div class="progress-label">
+          <span>Course Progress</span>
+          <strong>{{ course.progress }}%</strong>
+        </div>
+        <p-progressBar [value]="course.progress" [style]="{'height': '12px', 'border-radius': '6px'}">
+        </p-progressBar>
+      </div>
+
+      <div class="course-content-placeholder">
+        <i class="pi pi-book placeholder-icon"></i>
+        <p>Course content would be displayed here in the full implementation.</p>
+        <p class="hint">This is a proof-of-concept. Backend integration will populate the actual course material.</p>
+      </div>
+
+      <ng-template pTemplate="footer">
+        <div class="footer-actions">
+          <p-button *ngIf="course.status !== 'completed'" label="Mark as Completed"
+            icon="pi pi-check" [loading]="completing"
+            (onClick)="markCompleted()"></p-button>
+          <p-button *ngIf="course.status === 'completed'" label="Completed" icon="pi pi-check"
+            styleClass="p-button-success p-button-outlined" [disabled]="true"></p-button>
+        </div>
+      </ng-template>
+    </p-card>
+  </ng-container>
+
+  <ng-container *ngIf="!loading && !course">
+    <div class="not-found">
+      <i class="pi pi-exclamation-circle"></i>
+      <p>Course not found.</p>
+      <p-button label="Back to Training" icon="pi pi-arrow-left" (onClick)="goBack()"></p-button>
+    </div>
+  </ng-container>
+</div>

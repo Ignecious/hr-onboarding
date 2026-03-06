@@ -1,0 +1,130 @@
+<div class="visibility-dashboard">
+  <div class="dashboard-header">
+    <h2>360° Visibility Dashboard</h2>
+    <p>Real-time onboarding status overview</p>
+  </div>
+
+  <div *ngIf="loading" class="loading-container">
+    <p-progressBar mode="indeterminate" [style]="{'height': '4px'}"></p-progressBar>
+  </div>
+
+  <ng-container *ngIf="dashboardData && !loading">
+    <!-- KPI Cards -->
+    <div class="kpi-grid">
+      <p-card styleClass="kpi-card kpi-ready">
+        <div class="kpi-content">
+          <i class="pi pi-check-circle kpi-icon"></i>
+          <div class="kpi-info">
+            <div class="kpi-value">{{ dashboardData.kpis.readyToStart }}</div>
+            <div class="kpi-label">Ready to Start</div>
+          </div>
+        </div>
+      </p-card>
+      <p-card styleClass="kpi-card kpi-in-progress">
+        <div class="kpi-content">
+          <i class="pi pi-spinner kpi-icon"></i>
+          <div class="kpi-info">
+            <div class="kpi-value">{{ dashboardData.kpis.inProgress }}</div>
+            <div class="kpi-label">In Progress</div>
+          </div>
+        </div>
+      </p-card>
+      <p-card styleClass="kpi-card kpi-blocked">
+        <div class="kpi-content">
+          <i class="pi pi-ban kpi-icon"></i>
+          <div class="kpi-info">
+            <div class="kpi-value">{{ dashboardData.kpis.blocked }}</div>
+            <div class="kpi-label">Blocked</div>
+          </div>
+        </div>
+      </p-card>
+      <p-card styleClass="kpi-card kpi-stalled">
+        <div class="kpi-content">
+          <i class="pi pi-pause kpi-icon"></i>
+          <div class="kpi-info">
+            <div class="kpi-value">{{ dashboardData.kpis.stalled }}</div>
+            <div class="kpi-label">Stalled</div>
+          </div>
+        </div>
+      </p-card>
+      <p-card styleClass="kpi-card kpi-at-risk">
+        <div class="kpi-content">
+          <i class="pi pi-exclamation-triangle kpi-icon"></i>
+          <div class="kpi-info">
+            <div class="kpi-value">{{ dashboardData.kpis.atRisk }}</div>
+            <div class="kpi-label">At Risk</div>
+          </div>
+        </div>
+      </p-card>
+    </div>
+
+    <!-- Filters -->
+    <p-card styleClass="filters-card mt-4">
+      <div class="filters-row">
+        <span class="p-input-icon-left search-input">
+          <i class="pi pi-search"></i>
+          <input pInputText type="text" placeholder="Search by name or ID..."
+            [(ngModel)]="searchText" (input)="applyFilter()" />
+        </span>
+        <p-dropdown [options]="departmentOptions" [(ngModel)]="selectedDepartment"
+          placeholder="All Departments" (onChange)="applyFilter()" styleClass="filter-dropdown">
+        </p-dropdown>
+        <p-dropdown [options]="statusOptions" [(ngModel)]="selectedStatus"
+          placeholder="All Statuses" (onChange)="applyFilter()" styleClass="filter-dropdown">
+        </p-dropdown>
+      </div>
+    </p-card>
+
+    <!-- Employee Status Table -->
+    <p-card header="Employee Onboarding Status" styleClass="mt-4">
+      <p-table [value]="filteredEmployees" [rowHover]="true" [paginator]="true" [rows]="10"
+        [tableStyle]="{'min-width': '70rem'}">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Employee ID</th>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Progress</th>
+            <th>Status</th>
+            <th>Blocker</th>
+            <th>Actions</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-employee>
+          <tr>
+            <td>{{ employee.employeeId }}</td>
+            <td>{{ employee.name }}</td>
+            <td>{{ employee.department }}</td>
+            <td>
+              <p-progressBar [value]="employee.completionPercentage" [style]="{'height': '8px'}">
+              </p-progressBar>
+              <small>{{ employee.completionPercentage }}%</small>
+            </td>
+            <td>
+              <p-tag [value]="getStatusLabel(employee.status)"
+                [severity]="getStatusSeverity(employee.status)"></p-tag>
+            </td>
+            <td>
+              <span *ngIf="employee.blocker" class="blocker-text">{{ employee.blocker }}</span>
+              <span *ngIf="!employee.blocker" class="text-muted">—</span>
+            </td>
+            <td>
+              <p-button icon="pi pi-eye" styleClass="p-button-text p-button-sm"
+                pTooltip="View" (onClick)="onView(employee)"></p-button>
+              <p-button *ngIf="employee.blocker" icon="pi pi-wrench"
+                styleClass="p-button-text p-button-sm p-button-warning"
+                pTooltip="Resolve" (onClick)="onResolve(employee)"></p-button>
+              <p-button icon="pi pi-envelope" styleClass="p-button-text p-button-sm p-button-info"
+                pTooltip="Contact" (onClick)="onContact(employee)"></p-button>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="7" class="text-center">No employees found matching the selected filters.</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-card>
+  </ng-container>
+</div>

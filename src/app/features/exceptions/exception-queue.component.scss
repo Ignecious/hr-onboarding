@@ -1,0 +1,44 @@
+.exception-queue {
+  padding: 1.5rem;
+
+  .page-header {
+    margin-bottom: 1.5rem;
+    h2 { margin: 0 0 0.25rem; font-size: 1.5rem; color: #1e293b; }
+    p { margin: 0; color: #64748b; }
+  }
+
+  .loading-container { margin-bottom: 1rem; }
+
+  .filters-card {
+    .filters-row {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .filter-dropdown { min-width: 180px; }
+    .exception-count { margin-left: auto; color: #64748b; font-size: 0.9rem; }
+  }
+
+  .mt-4 { margin-top: 1.5rem; }
+
+  .details-cell {
+    max-width: 220px;
+    font-size: 0.85rem;
+    color: #475569;
+  }
+
+  .text-center { text-align: center; padding: 2rem; color: #64748b; }
+
+  .severity-row-critical td:first-child { border-left: 3px solid #ef4444; }
+  .severity-row-high td:first-child { border-left: 3px solid #f97316; }
+  .severity-row-medium td:first-child { border-left: 3px solid #eab308; }
+  .severity-row-low td:first-child { border-left: 3px solid #3b82f6; }
+}
+
+@media (max-width: 768px) {
+  .exception-queue {
+    padding: 1rem;
+    .filters-card .filter-dropdown { width: 100%; }
+  }
+}
