@@ -1,0 +1,79 @@
+<div class="exception-queue">
+  <div class="page-header">
+    <h2>Exception Queue</h2>
+    <p>Manage and resolve onboarding exceptions</p>
+  </div>
+
+  <div *ngIf="loading" class="loading-container">
+    <p-progressBar mode="indeterminate" [style]="{'height': '4px'}"></p-progressBar>
+  </div>
+
+  <ng-container *ngIf="!loading">
+    <!-- Filters -->
+    <p-card styleClass="filters-card">
+      <div class="filters-row">
+        <p-dropdown [options]="severityOptions" [(ngModel)]="selectedSeverity"
+          placeholder="All Severities" (onChange)="applyFilter()" styleClass="filter-dropdown">
+        </p-dropdown>
+        <p-dropdown [options]="statusOptions" [(ngModel)]="selectedStatus"
+          placeholder="All Statuses" (onChange)="applyFilter()" styleClass="filter-dropdown">
+        </p-dropdown>
+        <span class="exception-count">
+          Showing {{ filteredExceptions.length }} of {{ exceptions.length }} exceptions
+        </span>
+      </div>
+    </p-card>
+
+    <!-- Exceptions Table -->
+    <p-card styleClass="mt-4">
+      <p-table [value]="filteredExceptions" [rowHover]="true" [paginator]="true" [rows]="10"
+        [tableStyle]="{'min-width': '65rem'}">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Severity</th>
+            <th>Type</th>
+            <th>Employee</th>
+            <th>Detected</th>
+            <th>Status</th>
+            <th>Details</th>
+            <th>Actions</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-exception>
+          <tr [class]="'severity-row-' + exception.severity">
+            <td>
+              <p-tag [value]="exception.severity | uppercase"
+                [severity]="getSeverityTag(exception.severity)">
+              </p-tag>
+            </td>
+            <td>{{ getTypeLabel(exception.type) }}</td>
+            <td>{{ exception.employeeName }}</td>
+            <td>{{ formatDate(exception.detectedAt) }}</td>
+            <td>
+              <p-tag [value]="getStatusLabel(exception.status)"
+                [severity]="getStatusSeverity(exception.status)">
+              </p-tag>
+            </td>
+            <td class="details-cell">{{ exception.details }}</td>
+            <td>
+              <p-button *ngIf="exception.status !== 'resolved' && exception.status !== 'dismissed'"
+                icon="pi pi-check" label="Resolve" styleClass="p-button-text p-button-sm p-button-success"
+                (onClick)="onResolve(exception)" pTooltip="Mark as Resolved"></p-button>
+              <p-button *ngIf="exception.status === 'new'"
+                icon="pi pi-arrow-up" label="Escalate" styleClass="p-button-text p-button-sm p-button-warning"
+                (onClick)="onEscalate(exception)" pTooltip="Escalate"></p-button>
+              <p-button *ngIf="exception.status !== 'dismissed' && exception.status !== 'resolved'"
+                icon="pi pi-times" styleClass="p-button-text p-button-sm p-button-secondary"
+                (onClick)="onDismiss(exception)" pTooltip="Dismiss"></p-button>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="7" class="text-center">No exceptions found.</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-card>
+  </ng-container>
+</div>

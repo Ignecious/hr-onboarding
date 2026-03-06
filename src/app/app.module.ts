@@ -10,6 +10,10 @@ import { EmployeesModule } from './features/employees/employees.module';
 import { DocumentsModule } from './features/documents/documents.module';
 import { OnboardingModule } from './features/onboarding/onboarding.module';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
+import { VisibilityDashboardModule } from './features/visibility-dashboard/visibility-dashboard.module';
+import { EmployeePortalModule } from './features/employee-portal/employee-portal.module';
+import { ExceptionsModule } from './features/exceptions/exceptions.module';
+import { TrainingModule } from './features/training/training.module';
 
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -34,6 +38,10 @@ import { MessageService } from 'primeng/api';
     EmployeesModule,
     DocumentsModule,
     OnboardingModule,
+    VisibilityDashboardModule,
+    EmployeePortalModule,
+    ExceptionsModule,
+    TrainingModule,
     TableModule,
     ButtonModule,
     InputTextModule,
